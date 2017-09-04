@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	firmataAdaptor := firmata.NewAdaptor("COM111")
+	firmataAdaptor := firmata.NewAdaptor("/dev/ttyACM0")
 	laser := gpio.NewLedDriver(firmataAdaptor, "13")
 
 	work := func() {
