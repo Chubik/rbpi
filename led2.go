@@ -8,8 +8,8 @@ import (
 
 func main() {
 	//	firmataAdaptor := firmata.NewAdaptor("COM111")
-	firmataAdaptor := raspi.NewAdaptor()
-	laser := gpio.NewLedDriver(firmataAdaptor, "13")
+	r := raspi.NewAdaptor()
+	laser := gpio.NewLedDriver(r, "13")
 
 	work := func() {
 		laser.On()
@@ -17,7 +17,7 @@ func main() {
 	}
 
 	robot := gobot.NewRobot("bot",
-		[]gobot.Connection{firmataAdaptor},
+		[]gobot.Connection{r},
 		[]gobot.Device{laser},
 
 		work,
