@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"sync"
 	"time"
 
@@ -9,26 +10,23 @@ import (
 	"periph.io/x/periph/host"
 )
 
+var (
+	lights chan string
+	wg     sync.WaitGroup
+)
+
 func main() {
-	var wg sync.WaitGroup
+	lights = make(chan string)
 	host.Init()
-	// for l := gpio.Low; ; l = !l {
-	// 	gpioreg.ByName("13").Out(l)
-	// 	time.Sleep(500 * time.Millisecond)
-	// 	gpioreg.ByName("6").Out(l)
-	// 	time.Sleep(500 * time.Millisecond)
-	// 	gpioreg.ByName("5").Out(l)
-	// 	time.Sleep(500 * time.Millisecond)
-	// }
 	wg.Add(3)
 	go ledOUT("13", 500)
 	go ledOUT("6", 600)
 	go ledOUT("5", 700)
-	// go func() {
-	// 	for i := range lights {
-	// 		fmt.Println(i)
-	// 	}
-	// }()
+	go func() {
+		for i := range lights {
+			fmt.Println(i)
+		}
+	}()
 
 	wg.Wait()
 }
@@ -37,5 +35,6 @@ func ledOUT(name string, tm time.Duration) {
 	for l := gpio.Low; ; l = !l {
 		gpioreg.ByName(name).Out(l)
 		time.Sleep(tm * time.Millisecond)
+		lights <- name
 	}
 }
