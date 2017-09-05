@@ -13,7 +13,8 @@ func main() {
 	for l := gpio.Low; ; l = !l {
 		gpioreg.ByName("13").Out(l)
 		time.Sleep(500 * time.Millisecond)
-		gpioreg.ByName("13").Out(gpio.High)
+		gpioreg.ByName("6").Out(gpio.High)
 		time.Sleep(500 * time.Millisecond)
+		gpioreg.ByName("6").Out(gpio.Low)
 	}
 }
