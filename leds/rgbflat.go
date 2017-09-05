@@ -22,8 +22,8 @@ func main() {
 	// }
 	wg.Add(3)
 	go ledOUT("13", 500)
-	go ledOUT("6", 300)
-	go ledOUT("5", 100)
+	go ledOUT("6", 600)
+	go ledOUT("5", 700)
 	// go func() {
 	// 	for i := range lights {
 	// 		fmt.Println(i)
