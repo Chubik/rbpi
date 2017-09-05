@@ -21,9 +21,9 @@ func main() {
 	// 	time.Sleep(500 * time.Millisecond)
 	// }
 	wg.Add(3)
-	go ledOUT("13")
-	go ledOUT("6")
-	go ledOUT("5")
+	go ledOUT("13", 500)
+	go ledOUT("6", 300)
+	go ledOUT("5", 100)
 	// go func() {
 	// 	for i := range lights {
 	// 		fmt.Println(i)
@@ -33,9 +33,9 @@ func main() {
 	wg.Wait()
 }
 
-func ledOUT(name string) {
+func ledOUT(name string, tm time.Duration) {
 	for l := gpio.Low; ; l = !l {
 		gpioreg.ByName(name).Out(l)
-		time.Sleep(500 * time.Millisecond)
+		time.Sleep(tm * time.Millisecond)
 	}
 }
