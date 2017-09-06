@@ -16,7 +16,7 @@ func main() {
 	}
 
 	// Lookup a pin by its number:
-	p := gpioreg.ByName("04")
+	p := gpioreg.ByName("17")
 	fmt.Printf("%s: %s\n", p, p.Function())
 
 	// Set it as input, with an internal pull down resistor:
