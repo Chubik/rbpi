@@ -25,7 +25,7 @@ func main() {
 
 	for {
 		motion.WaitForEdge(-1)
-		if motion.Read() == true {
+		if motion.Read() == false {
 			led.Out(gpio.High)
 		} else {
 			led.Out(gpio.Low)
