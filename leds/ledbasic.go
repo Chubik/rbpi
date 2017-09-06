@@ -11,7 +11,7 @@ import (
 func main() {
 	host.Init()
 	for l := gpio.Low; ; l = !l {
-		gpioreg.ByName("13").Out(l)
+		gpioreg.ByName("26").Out(l)
 		time.Sleep(500 * time.Millisecond)
 	}
 }
