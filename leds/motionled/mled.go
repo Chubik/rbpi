@@ -9,15 +9,28 @@ import (
 	"periph.io/x/periph/host"
 )
 
+var (
+	gpioIN  string
+	gpioOUT string
+)
+
 func main() {
+	fmt.Println("Initialization...")
+	gpioIN = "17"
+	gpioOUT = "26"
+	//TODO: periph states status
 	if _, err := host.Init(); err != nil {
 		log.Fatal(err)
 	}
+	fmt.Println("Loaded periph driver.")
 
-	motion := gpioreg.ByName("17")
-	fmt.Printf("%s: %s\n", motion, motion.Function())
-	led := gpioreg.ByName("26")
-	fmt.Printf("%s: %s\n", led, led.Function())
+	motion := gpioreg.ByName(gpioIN)
+
+	led := gpioreg.ByName(gpioOUT)
+
+	fmt.Printf("Initialized gpio IN %s , gpio OUT %s \n", gpioIN, gpioOUT)
+	fmt.Printf("gpioIN %s: %s\n", motion, motion.Function())
+	fmt.Printf("gpioOUT %s: %s\n", led, led.Function())
 
 	if err := motion.In(gpio.PullDown, gpio.BothEdges); err != nil {
 		log.Fatal(err)
