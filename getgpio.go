@@ -9,5 +9,8 @@ import (
 
 func main() {
 	host.Init()
-	fmt.Println(gpioreg.All())
+	for _, gi := range gpioreg.All() {
+		fmt.Println(gpioreg.ByName(gi).Name)
+	}
+
 }
